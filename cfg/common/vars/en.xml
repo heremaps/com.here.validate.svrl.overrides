@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This file is part of the Extended DITA Validator project.
+  See the accompanying LICENSE file for applicable licenses.
+-->
+<vars>
+	<variable id="element-blacklisted">The &lt;@NAME&gt; element is not compliant with our DITA documentation standards.</variable>
+  <variable id="id-blacklisted">ID values must not contain the word 'content'. Change the ID value.</variable>
+	<variable id="image-product-filtered-not-included">Found &lt;@NAME product="PARAM1"&gt;. Add this element to the file includes.dita and reference it with a conref.</variable>
+</vars>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  This file is part of the Extended DITA Validator project.
+  See the accompanying LICENSE file for applicable licenses.
+--><project name="com.here.validate.svrl.overrides">
+	<!--
+	Setting up schematron processing. Sets up ant variable overrides.
+-->
+	<target name="custom-validation-pre-processs">
+		<dirname property="com.here.validate.svrl.overrides.dir" file="${ant.file.com.here.validate.svrl.overrides}"/>
+		<property name="svrl.customization.dir" value="${com.here.validate.svrl.overrides.dir}/xsl"/>
+		<echo level="info" message="Initializing DITA validation - Loading schematron rules from ${com.here.validate.svrl.overrides.dir}/xsl"/>
+	</target>
+
+
+	<target name="custom-validation" depends="custom-validation-pre-processs, svrl-process"/>
+	<!--
+		Ant target executed to create an SVRL file
+	-->
+	<target name="dita2overrides" depends="custom-validation, svrl-merge"/>
+	<!--
+		Ant target executed when the echo transtype is invoked.
+	-->
+	<target name="dita2overrides-echo" depends="dita2overrides, svrl-filter"/>
+</project>
