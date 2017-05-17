@@ -9,7 +9,15 @@
 -->
 	<target name="custom-validation-pre-processs">
 		<dirname property="com.here.validate.svrl.overrides.dir" file="${ant.file.com.here.validate.svrl.overrides}"/>
+		<!--
+			Use the default location for the XSLT unless an override has been set.
+		-->
 		<property name="svrl.customization.dir" value="${com.here.validate.svrl.overrides.dir}/xsl"/>
+		<!--
+			Use the default severity for each rule unless an override has been set.
+		-->
+		<property name="svrl.ruleset.file" value="${com.here.validate.svrl.overrides.dir}/cfg/ruleset/default.xml"/>
+
 		<echo level="info" message="Initializing DITA validation - Loading schematron rules from ${com.here.validate.svrl.overrides.dir}/xsl" />
 	</target>
 
