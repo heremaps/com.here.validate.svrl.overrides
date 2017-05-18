@@ -80,7 +80,7 @@ The distribution ZIP file is generated under `build/distributions`.
 -  Run the plug-in installation command:
 
 ```bash
-dita -install https://github.com/heremaps/com.here.validate.svrl/archive/v1.0.0.zip
+dita -install https://github.com/heremaps/com.here.validate.svrl/archive/v1.1.0.zip
 ```
 
 
@@ -92,7 +92,7 @@ Installation
 -  Run the plug-in installation command:
 
 ```bash
-dita -install https://github.com/heremaps/com.here.validate.svrl.overrides/archive/v1.0.0.zip
+dita -install https://github.com/heremaps/com.here.validate.svrl.overrides/archive/v1.1.0.zip
 ```
 
 The `dita` command line tool requires no additional configuration.
