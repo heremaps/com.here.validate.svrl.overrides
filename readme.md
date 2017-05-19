@@ -351,11 +351,11 @@ Now add the messages into language files found within the `cfg/common/vars` dire
 Ignoring Validator Rules
 ------------------------
 
-#### Removing validator rules globally
+### Removing validator rules globally
 
 This DITA-OT plug-in is an extension of the [base DITA validator](https://github.com/heremaps/com.here.validate.svrl) and includes an example within its XSL files to show how to remove rules globally. Please examine the code to see how to do this.
 
-#### Ignoring a validator rule throughout a document
+### Ignoring a validator rule throughout a document
 
 Individual rules can be ignored by adding the `args.validate.ignore.rules` parameter to the command line. The value of the parameter should be a comma-delimited list of each `rule-id` to ignore.
 
@@ -366,7 +366,7 @@ For example to ignore the `table-id-missing` validation rule within a document y
 ```
 
 
-#### Ignoring a specific instance of a validator rule
+### Ignoring a specific instance of a validator rule
 
 Specific instances of a rule can be ignored by adding a comment within the `*.dita` file. The comment should start with `ignore-rule`, and needs to be added at the location where the error is flagged.
 
@@ -404,6 +404,49 @@ Some rules such as FIXME and TODO in the running text need to be double escaped 
 </p>
 ```
 
+### Ignoring all warnings within a block
+
+A block of DITA can be excluded from firing all rules at **WARNING** level by adding the comment `ignore-all-warnings` to the block. This is especially useful to avoid false positive TODO warnings for text which is in Spanish.
+
+```xml
+<!--
+	We want to display the Spanish text below which would usually
+	result in a warning
+-->
+<section xml:lang="es-es" id="legal-es">
+	<!-- ignore-all-warnings -->
+	<title>Avisos legales</title>
+	<p>
+		© 2017 <keyword keyref="brand-name"/> Global B.V. Todos los derechos reservados.
+	</p>
+	<p>
+		Este material, incluidos la documentación y los programas informáticos relacionados, está protegido por derechos de autor controlados
+		por <keyword keyref="brand-name"/>. Todos los derechos están reservados. La copia, incluidos la reproducción, almacenamiento,
+		adaptación o traducción de una parte o de todo este material requiere el consentimiento por escrito de <keyword keyref="brand-name"/>.
+		Este material también contiene información confidencial, que no se puede revelar a otras personas sin el consentimiento previo y
+		por escrito de <keyword keyref="brand-name"/>.
+	</p>
+<section>
+```
+
+### Ignoring all errors within a block
+
+A block of DITA can be excluded from firing all rules at **ERROR** level by adding the comment `ignore-all-errors` to the block. This is useful to avoid issues with generated DITA files which are parsable DITA, but which may not satisfy in-house validation style rules.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- THIS TOPIC IS GENERATED -->
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="generated-topic" other-props="generated">
+	<!-- ignore-all-warnings, ignore-all-errors -->
+	<title>Topic title</title>
+	<body>
+		Generated Content goes here...
+	</body>
+</topic>
+```
+
+Rules set at **FATAL** level cannot be ignored.
 
 
 Sample Document
