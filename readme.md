@@ -3,7 +3,7 @@
 Extended DITA Validator for DITA-OT
 ===================================
 
-Copyright (c) 2016 HERE Europe B.V.
+Copyright (c) 2018 HERE Europe B.V.
 
 See the [LICENSE](LICENSE) file in the root of this project for license details.
 
@@ -57,7 +57,7 @@ Prerequisites
 
 ### Requirements
 
-The  Extended validator has been tested against DITA-OT 2.2.x. It is recommended that you upgrade to the latest version. Running the validator plug-in against earlier versions of DITA-OT will not work as it uses the newer `getVariable` template. To work with DITA-OT 1.8.5 this would need to be refactored to use `getMessage`
+The  Extended validator has been tested against DITA-OT 3.0.x. It is recommended that you upgrade to the latest version. Running the validator plug-in against earlier versions of DITA-OT will not work as it uses the newer `getVariable` template. To work with DITA-OT 1.8.5 this would need to be refactored to use `getMessage`. The validator can be run safely against DITA-OT 2.x - it also does not need to specially invoke the older Saxon XSLT processor.
 
 ### Installing DITA-OT
 
@@ -80,7 +80,7 @@ The distribution ZIP file is generated under `build/distributions`.
 -  Run the plug-in installation command:
 
 ```bash
-dita -install https://github.com/heremaps/com.here.validate.svrl/archive/v1.0.0.zip
+dita -install https://github.com/heremaps/com.here.validate.svrl/archive/v1.1.0.zip
 ```
 
 
@@ -92,7 +92,7 @@ Installation
 -  Run the plug-in installation command:
 
 ```bash
-dita -install https://github.com/heremaps/com.here.validate.svrl.overrides/archive/v1.0.0.zip
+dita -install https://github.com/heremaps/com.here.validate.svrl.overrides/archive/v1.1.0.zip
 ```
 
 The `dita` command line tool requires no additional configuration.
@@ -110,12 +110,6 @@ A test document can be found within the plug-in at `dita_docs/dita_ot/plugins/co
 To create an SVRL file with this **extended** plug-in (where the results will include overriden rules) use the `overrides` transform. This transform is an override of the base SVRL file creation (`svrl`) transform.
 
 -  From a terminal prompt move to the directory holding the document to validate
-
--  Clean the output directory (named "`out`" in the examples below), to ensure that the result from an old validation run is not present.
-
-```bash
-rm -rf ./out
-```
 
 -  SVRL file creation can be run like any other DITA-OT transform:
 
@@ -149,7 +143,6 @@ Once the command has run, an SVRL file is created
 
 To echo results to the command line with this **extended** plug-in (where the results will include overriden rules) use the `overrides-echo` transform. This transform is an override of the base DITA document validation (`svrl-echo`) transform.
 
--  Clean the output directory (named "`out`" in the examples below), to ensure that the result from an old validation run is not present.
 
 ```bash
 rm -rf ./out
@@ -190,31 +183,28 @@ Error: Errors detected during validation
 An Ant build file is supplied in the same directory as the sample document. The main target can be seen below:
 
 ```xml
-<!-- The path to dita-ot, correct as necesary  -->
-<dirname property="dita.dir" file="path-to-dita-ot"/>
-<!--the path to the DITA document to build, change as necessary -->
-<property name="args.input" value="path-to-doc/document.ditamap"/>
-<!-- Minimal classpath to invoke DITA OT via ANT. -->
-<path id="dita.ot.classpath">
-	... etc..
-</path>
-<target name="validate">
-	<java classname="org.apache.tools.ant.launch.Launcher" fork="true" failonerror="true" classpathref="dita.ot.classpath">
-		<arg value="-Dargs.input=${args.input}"/>
-		<arg value="-Ddita.dir=${dita.dir}"/>
-		<arg value="-buildfile"/>
-		<arg value="${dita.dir}/build.xml"/>
-		<arg value="-Dgenerate-debug-attributes=false"/>
-		<arg value="-Doutput.dir=out/svrl"/>
-		<arg value="-Dtranstype=overrides-echo"/>
+<dirname property="dita.dir" file="PATH_TO_DITA_OT"/>
+<property name="dita.exec" value="${dita.dir}/bin/dita"/>
+<property name="args.input" value="PATH_TO_DITA_DOCUMENT/document.ditamap"/>
+
+<target name="validate" description="validate a document">
+	<exec executable="${dita.exec}" osfamily="unix" failonerror="true">
+		<arg value="-input"/>
+		<arg value="${args.input}"/>
+		<arg value="-output"/>
+		<arg value="${dita.dir}/out/svrl"/>
+		<arg value="-format"/>
+		<arg value="overrides-echo"/>
 		<!-- validation transform specific parameters -->
-		<arg value="-Dargs.validate.blacklist=(kilo)?metre,colour,fo,teh,fro,seperate"/>
-		<arg value="-Dargs.validate.check.case=HTTP[S]? ,JSON,JavaScript"/>
-		<arg value="-Dargs.validate.mode=default" />
-		<!-- Run the transform quietly to avoid verbose output. -->
-		<arg value="-S"/>
-		<arg value="-q"/>
-	</java>
+		<arg value="-Dargs.validate.blacklist=(kilo)?metre|colour|teh|seperate"/>
+		<arg value="-Dargs.validate.check.case=Bluetooth|HTTP[S]? |IoT|JSON|Java|Javadoc|JavaScript|XML"/>
+		<arg value="-Dargs.validate.color=true"/>
+	</exec>
+	<!-- For Windows run from a DOS command -->
+	<exec dir="${dita.dir}/bin" executable="cmd" osfamily="windows" failonerror="true">
+		<arg value="/C"/>
+		<arg value="dita -input ${args.input} -output ${dita.dir}/out/svrl -format svrl-echo -Dargs.validate.blacklist=&quot;(kilo)?metre|colour|teh|seperate&quot; -Dargs.validate.check.case=&quot;Bluetooth|HTTP[S]? |IoT|JSON|Java|Javadoc|JavaScript|XML&quot;"/>
+	</exec>	
 </target>
 ```
 

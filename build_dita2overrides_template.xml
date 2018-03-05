@@ -7,14 +7,17 @@
 	<!--
 	Setting up schematron processing. Sets up ant variable overrides.
 -->
-	<target name="custom-validation-pre-processs">
-		<dirname property="com.here.validate.svrl.overrides.dir" file="${ant.file.com.here.validate.svrl.overrides}"/>
-		<property name="svrl.customization.dir" value="${com.here.validate.svrl.overrides.dir}/xsl"/>
-		<echo level="info" message="Initializing DITA validation - Loading schematron rules from ${com.here.validate.svrl.overrides.dir}/xsl" />
+	<target name="custom-validation.init" depends="build-init">
+		<property name="svrl.customization.dir" value="${dita.plugin.com.here.validate.svrl.overrides.dir}/xsl"/>
+		<property name="svrl.ruleset.file" value="${dita.plugin.com.here.validate.svrl.overrides.dir}/cfg/ruleset/default.xml"/>
+
+		<dita-ot-echo id="SVRL002I">
+			<param name="1" value="Initializing DITA validation - Loading schematron rules from ${dita.plugin.com.here.validate.svrl.overrides.dir}/xsl" />
+		</dita-ot-echo>
 	</target>
 
 
-	<target name="custom-validation"  depends="custom-validation-pre-processs, svrl-process" />
+	<target name="custom-validation"  depends="custom-validation.init, svrl" />
 	<!--
 		Ant target executed to create an SVRL file
 	-->
