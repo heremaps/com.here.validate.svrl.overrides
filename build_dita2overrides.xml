@@ -9,9 +9,12 @@
 		<property name="svrl.customization.dir" value="${dita.plugin.com.here.validate.svrl.overrides.dir}/xsl"/>
 		<property name="svrl.ruleset.file" value="${dita.plugin.com.here.validate.svrl.overrides.dir}/cfg/ruleset/default.xml"/>
 
-		<dita-ot-echo id="SVRL002I">
-			<param name="1" value="Initializing DITA validation - Loading schematron rules from ${dita.plugin.com.here.validate.svrl.overrides.dir}/xsl"/>
-		</dita-ot-echo>
+		<condition property="otversion.legacy">
+  			<matches pattern="^[1|2].*" string="${otversion}"/>
+		</condition>
+		<typedef file="${dita.plugin.com.here.validate.svrl.dir}/resource/macros.xml"/>
+
+		<svrl-log id="SVRL002I" level="info" message="Initializing DITA validation - Loading schematron rules from ${dita.plugin.com.here.validate.svrl.overrides.dir}/xsl"/>
 	</target>
 
 
