@@ -3,15 +3,8 @@
   This file is part of the Extended DITA Validator project.
   See the accompanying LICENSE file for applicable licenses.
 -->
-<xsl:stylesheet xmlns:xhtml="http://www.w3.org/1999/xhtml"
-	 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	 xmlns:saxon="http://saxon.sf.net/"
-	 xmlns:java="http://www.java.com/"
-	 exclude-result-prefixes="java saxon"
-	 version="2.0">
-
-
-		<!-- Apply Rules which apply to all nodes  -->
+<xsl:stylesheet exclude-result-prefixes="java saxon" version="2.0" xmlns:java="http://www.java.com/" xmlns:saxon="http://saxon.sf.net/" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<!-- Apply Rules which apply to all nodes  -->
 	<xsl:template match="*" mode="common-pattern">
 		<active-pattern name="common-style-rules" role="style">
 			<xsl:apply-templates mode="common-style-rules" select="//*"/>
@@ -28,7 +21,6 @@
 			</active-pattern>
 		</xsl:if>
 	</xsl:template>
-
 	<!--
 		Custom DITA Style Rules - attribute values
 	-->
@@ -39,32 +31,30 @@
 			id-blacklisted - No element is allowed to use the id="content"
 		-->
 		<xsl:if test="@id ='content'">
-			 <xsl:call-template name="failed-assert">
+			<xsl:call-template name="failed-assert">
 				<xsl:with-param name="rule-id">id-blacklisted</xsl:with-param>
 				<xsl:with-param name="test">@id ='content'</xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
-
 		<!--
 			CUSTOM RULE - New restriction
-				element-blacklisted - <concept> is a banned element in our DITA
+				element-blacklisted - <concept>is a banned element in our DITA
 		-->
 		<xsl:if test="name()='concept'">
-			 <xsl:call-template name="failed-assert">
+			<xsl:call-template name="failed-assert">
 				<xsl:with-param name="rule-id">element-blacklisted</xsl:with-param>
 				<xsl:with-param name="test">@id ='content'</xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
 		<!--
 			CUSTOM RULE - New restriction
-				element-blacklisted -  <task> is a banned element in our DITA
+				element-blacklisted -  <task>is a banned element in our DITA
 		-->
 		<xsl:if test="name()='task'">
-			 <xsl:call-template name="failed-assert">
+			<xsl:call-template name="failed-assert">
 				<xsl:with-param name="rule-id">element-blacklisted</xsl:with-param>
 				<xsl:with-param name="test">@id ='content'</xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
-
 </xsl:stylesheet>

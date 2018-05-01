@@ -5,26 +5,22 @@
 	<!--
 	Setting up schematron processing. Sets up ant variable overrides.
 -->
-	<target name="custom-validation.init" depends="build-init">
+	<target depends="build-init" name="custom-validation.init">
 		<property name="svrl.customization.dir" value="${dita.plugin.com.here.validate.svrl.overrides.dir}/xsl"/>
 		<property name="svrl.ruleset.file" value="${dita.plugin.com.here.validate.svrl.overrides.dir}/cfg/ruleset/default.xml"/>
-
 		<condition property="otversion.legacy">
-  			<matches pattern="^[1|2].*" string="${otversion}"/>
+			<matches pattern="^[1|2].*" string="${otversion}"/>
 		</condition>
 		<typedef file="${dita.plugin.com.here.validate.svrl.dir}/resource/macros.xml"/>
-
 		<svrl-log id="SVRL002I" level="info" message="Initializing DITA validation - Loading schematron rules from ${dita.plugin.com.here.validate.svrl.overrides.dir}/xsl"/>
 	</target>
-
-
-	<target name="custom-validation" depends="custom-validation.init, svrl"/>
+	<target depends="custom-validation.init, svrl" name="custom-validation"/>
 	<!--
 		Ant target executed to create an SVRL file
 	-->
-	<target name="dita2overrides" depends="custom-validation, svrl-merge"/>
+	<target depends="custom-validation, svrl-merge" name="dita2overrides"/>
 	<!--
 		Ant target executed when the echo transtype is invoked.
 	-->
-	<target name="dita2overrides-echo" depends="dita2overrides, svrl-filter"/>
+	<target depends="dita2overrides, svrl-filter" name="dita2overrides-echo"/>
 </project>

@@ -4,7 +4,7 @@
 		See the accompanying LICENSE file for applicable licenses.
 	-->
 	<level id="fatal">
-		 <!-- Fatal rules will fail validation (cannot be overriden)-->
+		<!-- Fatal rules will fail validation (cannot be overriden)-->
 		<rule>appendices-href-missing</rule>
 		<rule>chapter-href-missing</rule>
 		<rule>coderef-href-ref-file-not-found</rule>

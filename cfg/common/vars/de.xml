@@ -5,6 +5,6 @@
 -->
 <vars>
 	<variable id="element-blacklisted">Das &lt;@NAME&gt; Element entspricht nicht dem unsere DITA Dokumentationsstandard.</variable>
-  <variable id="id-blacklisted">ID-Werte dürfen nicht das Wort 'content' enthalten. Ändern Sie den iD-Wert.</variable>
-	<variable id="image-product-filtered-not-included">Verschieben Sie &lt;@NAME product="PARAM1"&gt; in die Datei includes.dita und referenzieren Sie es durch eine conref-Referenz.</variable>
+	<variable id="id-blacklisted">ID-Werte dürfen nicht das Wort 'content' enthalten. Ändern Sie den iD-Wert.</variable>
+	<variable id="image-product-filtered-not-included">Verschieben Sie &lt;@NAME product=&quot;PARAM1&quot;&gt; in die Datei includes.dita und referenzieren Sie es durch eine conref-Referenz.</variable>
 </vars>
