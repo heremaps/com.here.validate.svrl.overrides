@@ -1,38 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
-  <active-pattern name="common-content-rules" role="content">
-    <fired-rule context="title"></fired-rule>
-    <fired-rule context="shortdesc"></fired-rule>
-    <fired-rule context="p"></fired-rule>
-    <fired-rule context="li"></fired-rule>
-    <fired-rule context="li"></fired-rule>Introduction to Bird CallingIf you wish to attract more birds to your Acme Bird Feeder,
-learn the art of bird calling. Bird calling is an efficient way
-to alert more birds to the presence of your bird feeder.Bird calling requires learning:Popular and classical bird songsHow to whistle like a bird</active-pattern>
-  <active-pattern name="common-style-rules" role="style">
-    <fired-rule context="concept[id=&quot;element-blacklisted-concept&quot;]"></fired-rule>
-    <fired-rule context="title"></fired-rule>
-    <fired-rule context="shortdesc"></fired-rule>
-    <fired-rule context="conbody"></fired-rule>
-    <fired-rule context="p"></fired-rule>
-    <fired-rule context="ul"></fired-rule>
-    <fired-rule context="li"></fired-rule>
-    <fired-rule context="li"></fired-rule>
-    <fired-rule context="concept[id=&quot;element-blacklisted-concept&quot;]"></fired-rule>
-    <failed-assert location="/element-blacklisted-concept.dita" role="fatal">
-      <diagnostic-reference diagnostic="element-blacklisted">Line 4: concept[id="element-blacklisted-concept"] - [element-blacklisted] 
+  <failed-assert location="/concept" role="fatal">
+    <diagnostic-reference diagnostic="element-blacklisted">Line 4: concept[id="element-blacklisted-concept"] - [element-blacklisted] 
 The &lt;concept&gt; element is not compliant with our DITA documentation standards.</diagnostic-reference>
-    </failed-assert>
-    <fired-rule context="title"></fired-rule>
-    <fired-rule context="shortdesc"></fired-rule>
-    <fired-rule context="conbody"></fired-rule>
-    <fired-rule context="p"></fired-rule>
-    <fired-rule context="ul"></fired-rule>
-    <fired-rule context="li"></fired-rule>
-    <fired-rule context="li"></fired-rule>
-  </active-pattern>
-  <active-pattern name="ditamap-structure-rules" role="structure">
-    <fired-rule context="topicref"></fired-rule>
-  </active-pattern>
+  </failed-assert>
 </svrl:schematron-output>
 
