@@ -18,9 +18,5 @@
 	<!--
 		Ant target executed to create an SVRL file
 	-->
-	<target depends="custom-validation, svrl-merge" name="dita2overrides"/>
-	<!--
-		Ant target executed when the echo transtype is invoked.
-	-->
-	<target depends="dita2overrides, svrl-filter" name="dita2overrides-echo"/>
+	<target depends="custom-validation, svrl-merge, svrl-filter" name="dita2overrides"/>
 </project>

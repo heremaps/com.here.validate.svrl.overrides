@@ -145,8 +145,8 @@ To create an SVRL file with this **extended** plug-in (where the results will in
 
 -  SVRL file creation can be run like any other DITA-OT transform:
 
-```
-PATH_TO_DITA_OT/bin/dita -f overrides -o out -i document.ditamap
+```console
+PATH_TO_DITA_OT/bin/dita -f overrides -o out -i document.ditamap --args.validate.mode=report
 ```
 
 Once the command has run, an SVRL file is created
@@ -177,17 +177,17 @@ Once the command has run, an SVRL file is created
 
 ### Echoing results to the command line
 
-To echo results to the command line with this **extended** plug-in (where the results will include overriden rules) use the `overrides-echo` transform. This transform is an override of the base DITA document validation (`svrl-echo`) transform.
+To echo results to the command line with this **extended** plug-in (where the results will include overriden rules) use the `overrides` transform without specifying a `report`. This transform is an override of the base DITA document validation (`svrl`) transform.
 
 
 ```console
 rm -rf ./out
 ```
 
--  Extended Document validation (`overrides-echo`) can be run like any other DITA-OT transform:
+-  Extended Document validation (`overrides`) can be run like any other DITA-OT transform:
 
 ```console
-PATH_TO_DITA_OT/bin/dita -f overrides-echo -i document.ditamap
+PATH_TO_DITA_OT/bin/dita -f overrides -i document.ditamap
 ```
 
 Once the command has run, all errors and warnings are echoed to the command line
@@ -222,6 +222,7 @@ Error: Errors detected during validation
 	- `strict`	- Outputs both warnings and errors. Fails on errors and warnings.
 	- `default` - Outputs both warnings and errors. Fails on errors only
 	- `lax`		- Ignores all warnings and outputs errors only. Fails on Errors only
+  - `report`  - Creates an SVRL file
 - `svrl.customization.dir` - Specifies the customization directory
 - `svrl.filter.file` - Specifies the location of the XSL file used to filter the echo output
 
