@@ -7,15 +7,13 @@
 	<!--
 		Define package details.
 	-->
-	<feature extension="package.version" value="2.0.0"/>
+	<feature extension="package.version" value="2.0.1"/>
 	<!--
 		This plugin is based on and 'extends' the plugin named below.
 	-->
 	<require plugin="com.here.validate.svrl"/>
 	<!--
 		Add new value to list of valid transformation type names.
-
-		See also: http://www.dita-ot.org/2.2/dev_ref/plugin-newtranstype.html
 	-->
 	<feature extension="dita.conductor.transtype.check" value="overrides"/>
 	<feature extension="dita.conductor.transtype.check" value="overrides-echo"/>
